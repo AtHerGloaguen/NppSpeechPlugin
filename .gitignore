@@ -1,0 +1,20 @@
+# Build outputs
+x64/
+Win32/
+ARM64/
+SpeechPlugin/
+Debug/
+Release/
+*.obj
+*.pdb
+*.ilk
+*.res
+*.tlog
+*.recipe
+*.log
+!change.log
+
+# Visual Studio
+.vs/
+*.user
+*.aps

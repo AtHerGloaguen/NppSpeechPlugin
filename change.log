@@ -2,6 +2,18 @@
 Change-log for SpeechPlugin.dll
 
 ------------------------------------------------------------------------------------
+13/10/26  v0.7.0.0 :
+------------------------------------------------------------------------------------
+	Windows OneCore voices (Julie, Paul, Hortense...) in addition to SAPI voices
+	Voice selection and reading speed setting (Speech Settings dialog)
+	Speak faster / Speak slower commands, settings saved in SpeechPlugin.ini
+	Optional right-click menu entries
+	English and French menus (automatic: same language as Notepad++)
+	Fixed: crash on ANSI documents with non UTF-8 characters
+	Fixed: 64-bit text positions (SCI_GETTEXTRANGEFULL)
+	Fixed: voice released while speaking, XML/HTML text parsed as SAPI markup
+
+------------------------------------------------------------------------------------
 29/10/08  v0.2.1.0 :
 ------------------------------------------------------------------------------------
 	Made compatible with Notepad++ 5.1 - Unicode release
