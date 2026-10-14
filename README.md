@@ -7,7 +7,10 @@ Fork de [chcg/SpeechPlugin](https://github.com/chcg/SpeechPlugin), lui-même iss
 
 ## Fonctionnalités
 
-- Lecture de la **sélection** ou du **document** entier, avec pause, reprise et arrêt
+- Lecture de la **sélection**, du **document** entier, ou **à partir d'ici** (de la sélection ou du curseur)
+- Lecture **phrase par phrase** : **phrase précédente**, **phrase suivante**, lecture / pause, arrêt
+- **Suivi de la lecture** : la phrase lue est surlignée en gris et le document défile pour la garder visible
+- **Boutons dans la barre d'outils** de Notepad++ : phrase précédente, lecture / pause, phrase suivante, arrêt
 - **Choix de la voix** :
   - voix SAPI « Desktop » (ex. *Microsoft Hortense Desktop*, *Microsoft Zira Desktop*)
   - voix Windows OneCore, de meilleure qualité (ex. *Microsoft Julie*, *Microsoft Paul*, *Microsoft Hortense*)
@@ -50,20 +53,26 @@ Menu **Modules d'extension** → **Speech** :
 | Commande | Rôle |
 |---|---|
 | Lire la sélection | Lit le texte sélectionné |
+| Lire à partir d'ici | Lit le document à partir de la sélection, ou sans sélection à partir de la phrase du curseur |
 | Lire le document | Lit tout le document actif |
+| Lecture / Pause | Met en pause et reprend ; si rien n'est lu, lit à partir d'ici |
+| Phrase précédente / Phrase suivante | Relit la phrase précédente, passe à la suivante |
 | Arrêter la lecture | Arrête la lecture |
-| Pause / Reprendre la lecture | Met en pause et reprend |
 | Lire plus vite / Lire plus lentement | Change la vitesse d'un cran |
 | Paramètres de lecture... | Ouvre la fenêtre de réglages |
+
+Les boutons ajoutés à la **barre d'outils** sont : ⏮ phrase précédente, ⏯ lecture / pause (enfoncé pendant la lecture), ⏭ phrase suivante, ⏹ arrêt.
 
 Des raccourcis clavier peuvent être associés à ces commandes via **Paramètres** → **Raccourcis clavier** → onglet **Modules d'extension**.
 
 ### Paramètres de lecture
 
 - **Voix** : liste des voix installées. Le choix s'applique immédiatement.
-- **Vitesse de lecture** : de -10 (lent) à +10 (rapide), 0 = normal. Avec une voix Desktop, le changement s'entend pendant la lecture en cours ; avec une voix OneCore, il s'applique à la lecture suivante.
+- **Vitesse de lecture** : de -10 (lent) à +10 (rapide), 0 = normal. Avec une voix Desktop, le changement s'entend immédiatement ; avec une voix OneCore, à partir de la phrase suivante.
 - **Tester** : lit une phrase d'essai avec la voix et la vitesse choisies.
-- **Ajouter au menu clic droit** : ajoute un sous-menu *Speech* au clic droit de l'éditeur (lire la sélection, lire le document, arrêter, plus vite, plus lentement, paramètres).
+- **Suivre la lecture** : surligne en gris la phrase en cours de lecture et fait défiler le document pour la garder visible.
+- **Boutons dans la barre d'outils** : ajoute les boutons de lecture à la barre d'outils. Nécessite un redémarrage de Notepad++.
+- **Ajouter au menu clic droit** : ajoute un sous-menu *Speech* au clic droit de l'éditeur (lire la sélection, lire à partir d'ici, lire le document, lecture / pause, phrase précédente / suivante, arrêter, plus vite, plus lentement, paramètres).
   Le plugin modifie pour cela le fichier `contextMenu.xml` de Notepad++ (une copie `contextMenu.xml.bak` est faite avant). **Redémarrez Notepad++** pour voir le changement.
 - **Langue des menus** : Automatique (langue de Notepad++), English ou Français. Nécessite un redémarrage de Notepad++.
 

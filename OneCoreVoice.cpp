@@ -42,6 +42,17 @@ namespace
 	unsigned gGeneration = 0;
 	bool gIsPaused = false;
 
+	// End of the text being played: posted to the plugin window
+	HWND gNotifyWnd = NULL;
+	UINT gNotifyMessage = 0;
+	WPARAM gNotifyToken = 0;
+
+	void NotifyEnd(unsigned generation)
+	{
+		if ((generation == gGeneration) && (gNotifyWnd != NULL))
+			PostMessage(gNotifyWnd, gNotifyMessage, gNotifyToken, 0);
+	}
+
 	// Same feel as SAPI: rate 10 is about 3 times faster, -10 about 3 times slower
 	double SpeakingRate(long rate)
 	{
@@ -110,18 +121,33 @@ namespace OneCoreVoice
 		return voices;
 	}
 
-	void Speak(const std::wstring &txt, const std::wstring &voiceId, long rate)
+	void Speak(const std::wstring &txt, const std::wstring &voiceId, long rate, HWND notifyWnd, UINT message, WPARAM token)
 	{
+		std::lock_guard<std::recursive_mutex> lock(gLock);
+
 		try
 		{
-			std::lock_guard<std::recursive_mutex> lock(gLock);
-
 			StopLocked();
+
+			gNotifyWnd = notifyWnd;
+			gNotifyMessage = message;
+			gNotifyToken = token;
 
 			if (!gSynth)
 				gSynth = SpeechSynthesizer();
 			if (!gPlayer)
+			{
 				gPlayer = MediaPlayer();
+
+				// Called on a worker thread
+				auto onEnd = [](MediaPlayer const &, auto const &)
+				{
+					std::lock_guard<std::recursive_mutex> lock(gLock);
+					NotifyEnd(gGeneration);
+				};
+				gPlayer.MediaEnded(onEnd);
+				gPlayer.MediaFailed(onEnd);
+			}
 
 			// An uninstalled voice leaves the default one
 			VoiceInformation voice = FindVoice(voiceId);
@@ -139,8 +165,16 @@ namespace OneCoreVoice
 				{
 					std::lock_guard<std::recursive_mutex> lock(gLock);
 
-					if ((status != AsyncStatus::Completed) || (generation != gGeneration) || !gPlayer)
+					if ((generation != gGeneration) || !gPlayer)
 						return;
+
+					if (status != AsyncStatus::Completed)
+					{
+						// Synthesis failed: go on with the next text
+						gPending = nullptr;
+						NotifyEnd(generation);
+						return;
+					}
 
 					gPending = nullptr;
 
@@ -152,11 +186,13 @@ namespace OneCoreVoice
 				}
 				catch (...)
 				{
+					NotifyEnd(generation);
 				}
 			});
 		}
 		catch (...)
 		{
+			NotifyEnd(gGeneration);
 		}
 	}
 

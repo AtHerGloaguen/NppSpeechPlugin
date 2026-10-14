@@ -9,6 +9,7 @@
 
 #pragma once
 
+#include <windows.h>
 #include <string>
 #include <vector>
 
@@ -24,8 +25,9 @@ namespace OneCoreVoice
 
 	std::vector<Info> EnumVoices();
 
-	// rate uses the SAPI range, -10 to 10
-	void Speak(const std::wstring &txt, const std::wstring &voiceId, long rate);
+	// rate uses the SAPI range, -10 to 10.
+	// When the text has been played (or could not be), message is posted to notifyWnd with token as wParam.
+	void Speak(const std::wstring &txt, const std::wstring &voiceId, long rate, HWND notifyWnd, UINT message, WPARAM token);
 	void Stop();
 	void Pause();
 	void Resume();

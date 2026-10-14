@@ -27,7 +27,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 // Dialog
 //
 
-IDD_SETTINGS DIALOGEX 0, 0, 240, 150
+IDD_SETTINGS DIALOGEX 0, 0, 240, 176
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Speech Settings"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
@@ -39,14 +39,35 @@ BEGIN
     CONTROL         "",IDC_RATE_SLIDER,"msctls_trackbar32",TBS_AUTOTICKS | TBS_BOTH | WS_TABSTOP,7,53,226,18
     LTEXT           "Slower",IDC_SLOWER_LABEL,10,74,80,8
     RTEXT           "Faster",IDC_FASTER_LABEL,150,74,80,8
-    CONTROL         "Show in the &right-click menu",IDC_CONTEXT_MENU,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,90,226,10
-    LTEXT           "Menu &language:",IDC_LANGUAGE_LABEL,7,108,75,8
-    COMBOBOX        IDC_LANGUAGE_COMBO,85,106,148,60,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    PUSHBUTTON      "&Test",IDC_VOICE_TEST,7,129,50,14
-    PUSHBUTTON      "&Normal",IDC_RATE_RESET,61,129,50,14
-    DEFPUSHBUTTON   "OK",IDOK,129,129,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,183,129,50,14
+    CONTROL         "&Follow the reading (highlight the sentence, scroll)",IDC_FOLLOW,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,90,226,10
+    CONTROL         "&Buttons in the toolbar",IDC_TOOLBAR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,103,226,10
+    CONTROL         "Show in the &right-click menu",IDC_CONTEXT_MENU,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,116,226,10
+    LTEXT           "Menu &language:",IDC_LANGUAGE_LABEL,7,134,75,8
+    COMBOBOX        IDC_LANGUAGE_COMBO,85,132,148,60,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "&Test",IDC_VOICE_TEST,7,155,50,14
+    PUSHBUTTON      "&Normal",IDC_RATE_RESET,61,155,50,14
+    DEFPUSHBUTTON   "OK",IDOK,129,155,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,183,155,50,14
 END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar buttons: bitmap for the standard icons, icons for the Fluent ones (light and dark mode)
+//
+
+IDB_PREVIOUS            BITMAP                  "icons/previous.bmp"
+IDB_PLAY_PAUSE          BITMAP                  "icons/playpause.bmp"
+IDB_NEXT                BITMAP                  "icons/next.bmp"
+IDB_STOP                BITMAP                  "icons/stop.bmp"
+IDI_PREVIOUS            ICON                    "icons/previous_light.ico"
+IDI_PLAY_PAUSE          ICON                    "icons/playpause_light.ico"
+IDI_NEXT                ICON                    "icons/next_light.ico"
+IDI_STOP                ICON                    "icons/stop_light.ico"
+IDI_PREVIOUS_DARK       ICON                    "icons/previous_dark.ico"
+IDI_PLAY_PAUSE_DARK     ICON                    "icons/playpause_dark.ico"
+IDI_NEXT_DARK           ICON                    "icons/next_dark.ico"
+IDI_STOP_DARK           ICON                    "icons/stop_dark.ico"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -55,8 +76,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,7,0,0
- PRODUCTVERSION 0,7,0,0
+ FILEVERSION 0,8,0,0
+ PRODUCTVERSION 0,8,0,0
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -73,12 +94,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "Jim Xochellis"
             VALUE "FileDescription", "Speech plugin for Notepad++"
-            VALUE "FileVersion", "0, 7, 0, 0"
+            VALUE "FileVersion", "0, 8, 0, 0"
             VALUE "InternalName", "SpeechPlugin.dll"
             VALUE "LegalCopyright", "Copyright (C) 2026"
             VALUE "OriginalFilename", "SpeechPlugin.dll"
             VALUE "ProductName", "Speech plugin for Notepad++"
-            VALUE "ProductVersion", "0, 7, 0, 0"
+            VALUE "ProductVersion", "0, 8, 0, 0"
         END
     END
     BLOCK "VarFileInfo"

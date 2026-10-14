@@ -301,6 +301,20 @@
   <ItemGroup>
     <ResourceCompile Include="SpeechPlugin.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="icons\previous.bmp" />
+    <Image Include="icons\playpause.bmp" />
+    <Image Include="icons\next.bmp" />
+    <Image Include="icons\stop.bmp" />
+    <Image Include="icons\previous_light.ico" />
+    <Image Include="icons\previous_dark.ico" />
+    <Image Include="icons\playpause_light.ico" />
+    <Image Include="icons\playpause_dark.ico" />
+    <Image Include="icons\next_light.ico" />
+    <Image Include="icons\next_dark.ico" />
+    <Image Include="icons\stop_light.ico" />
+    <Image Include="icons\stop_dark.ico" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

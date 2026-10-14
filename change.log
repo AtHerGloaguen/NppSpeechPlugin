@@ -2,6 +2,17 @@
 Change-log for SpeechPlugin.dll
 
 ------------------------------------------------------------------------------------
+14/10/26  v0.8.0.0 :
+------------------------------------------------------------------------------------
+	Reading sentence by sentence: Previous sentence / Next sentence commands
+	Play / Pause command: when nothing is read, reads from the selection or the cursor
+	Speak from Here command (from the selection, or from the sentence of the cursor)
+	The sentence being read is highlighted and kept visible (option)
+	Toolbar buttons: previous sentence, play / pause, next sentence, stop (option)
+	A speed change applies from the next sentence with OneCore voices too
+	Menu changed: Pause and Resume replaced by Play / Pause
+
+------------------------------------------------------------------------------------
 13/10/26  v0.7.0.0 :
 ------------------------------------------------------------------------------------
 	Windows OneCore voices (Julie, Paul, Hortense...) in addition to SAPI voices
